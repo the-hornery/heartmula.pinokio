@@ -1,0 +1,27 @@
+{
+  "daemon": true,
+  "run": [
+    {
+      "method": "shell.run",
+      "params": {
+        "conda": {
+          "path": "env",
+          "python": "python=3.10"
+        },
+        "message": "python app.py",
+        "on": [
+          {
+            "event": "/http:\\/\\/[0-9.:]+/",
+            "done": true
+          }
+        ]
+      }
+    },
+    {
+      "method": "local.set",
+      "params": {
+        "url": "{{input.event[0]}}"
+      }
+    }
+  ]
+}
