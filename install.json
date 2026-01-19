@@ -1,0 +1,27 @@
+{
+  "run": [
+    {
+      "method": "shell.run",
+      "params": {
+        "conda": {
+          "path": "env",
+          "python": "python=3.10"
+        },
+        "message": [
+          "set -e",
+          "if [ ! -d heartlib ]; then git clone https://github.com/HeartMuLa/heartlib.git; fi",
+          "python -V",
+          "pip install -U pip",
+          "pip install -U 'huggingface_hub[cli]'",
+          "pip install -e ./heartlib",
+          "pip install -U gradio pydub",
+          "pip install -U \"uvicorn[standard]\" websockets wsproto",
+          "mkdir -p ckpt",
+          "hf download --local-dir './ckpt' 'HeartMuLa/HeartMuLaGen'",
+          "hf download --local-dir './ckpt/HeartMuLa-oss-3B' 'HeartMuLa/HeartMuLa-oss-3B'",
+          "hf download --local-dir './ckpt/HeartCodec-oss' 'HeartMuLa/HeartCodec-oss'"
+        ]
+      }
+    }
+  ]
+}

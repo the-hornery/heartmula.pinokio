@@ -1,0 +1,13 @@
+{
+  "run": [{
+    "method": "shell.run",
+    "params": {
+      "conda": { "path": "env", "python": "python=3.10" },
+      "message": [
+        "set -e",
+        "if [ -d heartlib ]; then cd heartlib && git pull; else git clone https://github.com/HeartMuLa/heartlib.git; fi",
+        "pip install -e ./heartlib"
+      ]
+    }
+  }]
+}
