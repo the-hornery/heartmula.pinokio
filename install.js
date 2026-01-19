@@ -45,7 +45,7 @@ module.exports = {
         {
             method: "hf.download",
             params: {
-                "local-dir": "ckpt",
+                local_dir: "ckpt",
                 models: [
                     "HeartMuLa/HeartMuLaGen",
                     "HeartMuLa/HeartMuLa-oss-3B",
