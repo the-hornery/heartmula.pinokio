@@ -8,12 +8,24 @@ module.exports = {
                     python: "python=3.10"
                 },
                 message: [
-                    "pip install -U pip",
-                    "pip install -U huggingface_hub[cli]",
-                    "pip install gradio pydub uvicorn[standard] websockets wsproto",
-                    "if [ ! -d heartlib ]; then git clone https://github.com/HeartMuLa/heartlib.git; fi",
-                    "pip install -e ./heartlib"
+                    "uv pip install -U pip",
+                    "uv pip install -U huggingface_hub[cli]",
+                    "uv pip install gradio pydub uvicorn[standard] websockets wsproto"
                 ]
+            }
+        },
+        {
+            "when": "{{!exists('heartlib')}}",
+            "method": "shell.run",
+            "params": {
+                "message": "git clone https://github.com/HeartMuLa/heartlib.git"
+            }
+        },
+        {
+            method: "shell.run",
+            params: {
+                venv: "env",
+                message: "uv pip install -e ./heartlib"
             }
         },
         {
