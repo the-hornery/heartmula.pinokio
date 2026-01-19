@@ -12,7 +12,7 @@
           "if [ ! -d heartlib ]; then git clone https://github.com/HeartMuLa/heartlib.git; fi",
           "python -V",
           "pip install -U pip",
-          "pip install -U 'huggingface_hub[cli]'",
+          "pip install -U huggingface_hub",
           "pip install -e ./heartlib",
           "pip install -U gradio pydub",
           "pip install -U \"uvicorn[standard]\" websockets wsproto",
