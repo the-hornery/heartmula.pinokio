@@ -1,26 +1,61 @@
 {
+  "requires": {
+    "bundle": "ai"
+  },
   "run": [
     {
       "method": "shell.run",
       "params": {
-        "conda": {
-          "path": "env",
-          "python": "python=3.10"
-        },
-        "message": [
-          "set -e",
-          "if [ ! -d heartlib ]; then git clone https://github.com/HeartMuLa/heartlib.git; fi",
-          "python -V",
-          "pip install -U pip",
-          "pip install -U huggingface_hub",
-          "cd heartlib && pip install -e . && cd ..",
-          "pip install -U gradio pydub",
-          "pip install -U \"uvicorn[standard]\" websockets wsproto",
-          "mkdir -p ckpt",
-          "hf download --local-dir ./ckpt HeartMuLa/HeartMuLaGen",
-          "hf download --local-dir ./ckpt/HeartMuLa-oss-3B HeartMuLa/HeartMuLa-oss-3B",
-          "hf download --local-dir ./ckpt/HeartCodec-oss HeartMuLa/HeartCodec-oss"
-        ]
+        "message": "git clone https://github.com/HeartMuLa/heartlib.git app"
+      }
+    },
+    {
+      "method": "shell.run",
+      "params": {
+        "path": "app",
+        "venv": "env",
+        "message": "uv pip install -e ."
+      }
+    },
+    {
+      "method": "shell.run",
+      "params": {
+        "path": "app",
+        "venv": "env",
+        "message": "uv pip install huggingface_hub[hf-xet] gradio pydub uvicorn[standard] websockets wsproto datasets==2.20.0"
+      }
+    },
+    {
+      "method": "script.start",
+      "params": {
+        "uri": "torch.js",
+        "params": {
+          "venv": "env",
+          "path": "app",
+          "xformers": true,
+          "triton": true
+        }
+      }
+    },
+    {
+      "method": "hf.download",
+      "params": {
+        "_": ["HeartMuLa/HeartMuLaGen"],
+        "local-dir": "ckpt"
+      }
+    },
+    {
+      "method": "hf.download",
+      "params": {
+        "_": ["HeartMuLa/HeartMuLa-oss-3B"],
+        "local-dir": "ckpt/HeartMuLa-oss-3B"
+      }
+    },
+    {
+      "method": "hf.download",
+      "params": {
+        "_": ["HeartMuLa/HeartCodec-oss"],
+        "local-dir": "ckpt/HeartCodec-oss"
       }
     }
   ]
