@@ -1,14 +1,15 @@
 {
   "run": [
     {
-      "method": "shell.run",
+      "method": "fs.rm",
       "params": {
-        "message": [
-          "rm -rf env || true",
-          "rm -rf heartlib || true",
-          "rm -rf ckpt || true",
-          "rm -rf outputs || true"
-        ]
+        "path": "app"
+      }
+    },
+    {
+      "method": "fs.rm",
+      "params": {
+        "path": "ckpt"
       }
     }
   ]
