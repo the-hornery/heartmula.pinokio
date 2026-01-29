@@ -1,4 +1,6 @@
-# HeartMuLa (Pinokio App)
+# [ARCHIVED] HeartMuLa (Pinokio App)
+
+NOTE: This project has been archived as an alternative that will be better maintained has been released. Check out https://github.com/fspecii/HeartMuLa-Studio
 
 A lightweight **Pinokio community wrapper** for **HeartMuLa / heartlib** that provides a one-click local setup and a simple **Gradio UI** for generating music conditioned on **lyrics** + optional **tags**.
 
